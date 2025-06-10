@@ -95,7 +95,12 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+a {
+	text-decoration: none;
+	color: black;
+}
+
+li:hover, a:hover {
 	color: #B1663C;
 }
 #introduction {
@@ -139,7 +144,7 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
