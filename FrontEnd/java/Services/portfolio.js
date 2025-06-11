@@ -1,12 +1,18 @@
 import { fetchWork } from '../GetData.js';
 
-export async function afficherGallery() {
+// Fonction qui sert à afficher nos images, leurs alt et leurs description.
+
+export async function afficherGallery(categoryId = null) {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = '';
 
     const works = await fetchWork();
 
-    works.forEach(work => {
+    const filteredWorks = categoryId
+        ? works.filter(work => work.categoryId === categoryId)
+        : works;
+
+    filteredWorks.forEach(work => {
         const figure = document.createElement('figure');
         const image = document.createElement('img'); 
         image.src = work.imageUrl;
