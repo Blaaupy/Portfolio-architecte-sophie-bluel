@@ -100,7 +100,7 @@ a {
 	color: black;
 }
 
-li:hover, a:hover {
+li:hover, nav a:hover {
 	color: #B1663C;
 }
 #introduction {
