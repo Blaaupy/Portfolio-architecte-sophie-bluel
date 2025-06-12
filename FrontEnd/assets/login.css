@@ -1,0 +1,11 @@
+#mdpOublie {
+    color: black;
+}
+#login {
+    display: flex;
+    flex-direction: column;
+    width: 379px;
+    margin: auto;
+	margin-top: 192px;
+    text-align: center;
+}
