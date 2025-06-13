@@ -1,13 +1,18 @@
 import {afficherGallery} from './Services/portfolio.js';
 import { creeFiltre } from './Services/filtres.js'; 
+import { loginVerification } from './Services/login.js';
 
 // Affiche au chargement de la page tous les travaux et les filtres.
 window.addEventListener("DOMContentLoaded", async () => {
-    await creeFiltre();
-    afficherGallery();
+    if (document.querySelector("#portfolio")){
+        await creeFiltre();
+        afficherGallery();
+    }
+    
+    const form = document.querySelector("#loginForm");
+    form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        await loginVerification();
+    });
 });
 
-const seConnecter = document.querySelector('#login submit');
-seConnecter.addEventListener('click', function (){
-    tryLogin();
-})
