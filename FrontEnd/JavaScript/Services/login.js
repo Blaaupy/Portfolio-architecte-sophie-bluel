@@ -34,3 +34,39 @@ export async function loginVerification() {
         }
     }
 }
+
+export async function loginPage() {
+    const isTokenHere = localStorage.getItem("Token"); // Recupère le token dans le local storage, s'il n'y en a pas la valeur sera Null
+    if (isTokenHere !== null){ // Verification de si le token est présent ou non avec la valeur null comme expliqué juste au dessus
+        const logout = document.querySelector(".navLogin");
+        logout.innerHTML = ''; // Retirer le texte Login dans le Nav pour y mettre logout
+        const navLogout = document.createElement('p')
+        navLogout.textContent = "logout";
+        navLogout.style.cursor = "pointer"; // Ajoute un pointeur 
+
+        navLogout.addEventListener('click', () => {
+            const confirmation = window.confirm("Voulez-vous vraiment vous déconnecter ?"); // Alert pour comfirmer la déconnection 
+            if (confirmation) {
+                localStorage.removeItem("Token"); // Retire le token du local storage afin de vraiment tout déconnecter
+                location.reload(); // Recharge la page après logout
+            }
+        });
+        logout.appendChild(navLogout);
+
+        const btnModifier = document.querySelector(".projetsModifier");
+
+        const container = document.createElement("div");
+
+        const icon = document.createElement("i");
+        icon.classList.add("fa-solid", "fa-pen-to-square"); //Ajout de l'icon avec font awesome
+
+        const modifier = document.createElement("p");
+        modifier.textContent = "Modifier"; // Ajout du texte 
+
+        container.appendChild(icon);
+        container.appendChild(modifier);
+
+        btnModifier.appendChild(container);
+
+    }
+}

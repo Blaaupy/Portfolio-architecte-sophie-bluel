@@ -136,6 +136,20 @@ li:hover, nav a:hover {
 	margin-bottom: 1em;
 }
 
+.projetsModifier {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 30px;
+}
+
+.projetsModifier div {
+	display: flex;
+	align-self: self-start;
+	font-size: 20px;
+	margin-top: 5px;
+	gap: 8px;
+}
 /* Css boutons filtre */
 .listeFiltre {
 	display: flex;
