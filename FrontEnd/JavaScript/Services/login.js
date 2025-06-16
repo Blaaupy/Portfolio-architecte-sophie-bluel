@@ -25,7 +25,11 @@ export async function loginVerification() {
         console.error("Erreur : statut inattendu.");
     } else {
         if (status === 401 || status === 404) { // Non autorisée ou manque un élément
-            console.warn("Identifiants ou mot de passe incorrect.");
+            const messageErreur = document.querySelector(".messageErreur");
+            const message = document.createElement('p');
+            message.textContent = "Identifiants ou mot de passe incorrect.";
+            messageErreur.appendChild(message);
+            
         } else if (status === 200) { // Si la connexion est reussite 
             const data = await response.json();
             const token = data.token; 

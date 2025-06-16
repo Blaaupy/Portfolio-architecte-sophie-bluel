@@ -9,3 +9,11 @@
 	margin-top: 192px;
     text-align: center;
 }
+
+.messageErreur {
+    color: red;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+
