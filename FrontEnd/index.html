@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
 	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="assets/modal.css">
 </head>
 <body>
 <header>
@@ -41,6 +42,15 @@
 	<section id="portfolio">
 		<div class="projetsModifier">
 			<h2>Mes Projets</h2>
+			<aside class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+				<div class="modal-wrapper">
+					<span class="js-close-modal">&times;</span>
+					<h2>Galerie photo</h2>
+					<div class="galleryModal">
+					</div>
+					<input type="button" name="btn-add-photo" id="btn-add-photo" value="Ajouter une photo">
+				</div>
+			</aside>
 		</div>
 		<div class="listeFiltre">
 		</div>
@@ -60,6 +70,7 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+	
 </main>
 
 <footer>
@@ -69,6 +80,6 @@
 		</ul>
 	</nav>
 </footer>
-	
+<script src="./JavaScript/Services/modal.js"></script>
 </body>
 </html>

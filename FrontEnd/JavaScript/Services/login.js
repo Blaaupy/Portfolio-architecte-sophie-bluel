@@ -1,3 +1,4 @@
+
 export async function postUserLogin() {
     const userLoginData = {
         "email": document.querySelector("#emailForm").value,
@@ -39,7 +40,7 @@ export async function loginVerification() {
     }
 }
 
-export async function loginPage() {
+export async function indexEditionMode() {
     const isTokenHere = localStorage.getItem("Token"); // Recupère le token dans le local storage, s'il n'y en a pas la valeur sera Null
     if (isTokenHere !== null){ // Verification de si le token est présent ou non avec la valeur null comme expliqué juste au dessus
         const logout = document.querySelector(".navLogin");
@@ -60,7 +61,7 @@ export async function loginPage() {
         const btnModifier = document.querySelector(".projetsModifier");
 
         const container = document.createElement("div");
-
+        container.classList.add('js-modal')
         const icon = document.createElement("i");
         icon.classList.add("fa-solid", "fa-pen-to-square"); //Ajout de l'icon avec font awesome
 
