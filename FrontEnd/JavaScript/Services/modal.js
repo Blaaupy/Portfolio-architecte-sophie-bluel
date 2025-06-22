@@ -25,6 +25,7 @@ export async function afficherGalleryModal() { /* fonction copier de celle  de p
 }
 
 export async function openCloseModal() {
+    
     let modal = null
 
     const openModal = function() {
@@ -35,6 +36,7 @@ export async function openCloseModal() {
         modal = target;
         modal.addEventListener("click", closeModal);
         modal.querySelector(".js-close-modal").addEventListener("click", closeModal);
+        modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);
         afficherGalleryModal();
     }
 
@@ -45,8 +47,13 @@ export async function openCloseModal() {
         modal.setAttribute("aria-hidden", "true");
         modal.sremoveAttribute("aria-modal");
         modal.removeEventListener("click", closeModal);
-        modal.querySelector(".js-close-modal").addEventListener("click", closeModal);
+        modal.querySelector(".js-close-modal").removeEventListener("click", closeModal);
+        modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
         modal = null
+    }
+
+    const stopPropagation = function (e) {
+        e.stopPropagation()
     }
 
     const btnOuvrir = document.querySelector(".js-modal");
