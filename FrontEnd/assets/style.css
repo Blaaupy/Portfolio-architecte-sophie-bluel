@@ -39,7 +39,7 @@ blockquote, q {
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
+	content: "";
 	content: none;
 }
 table {
@@ -50,7 +50,7 @@ table {
 body {
 	max-width: 1140px;
 	margin:auto;
-	font-family: 'Work Sans' ;
+	font-family: "Work Sans" ;
 	font-size: 14px;
 }
 header {
@@ -65,21 +65,21 @@ section {
 h1{
 	display: flex;
 	flex-direction: column;
-	font-family: 'Syne';
+	font-family: "Syne";
 	font-size: 22px;
 	font-weight: 800;
 	color: #B1663C
 }
 
 h1 > span {
-	font-family: 'Work Sans';
+	font-family: "Work Sans";
 	font-size:10px;
 	letter-spacing: 0.1em;
 ;
 }
 
 h2{
-	font-family: 'Syne';
+	font-family: "Syne";
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
@@ -163,7 +163,7 @@ li:hover, nav a:hover {
 	height: 100%;
 	border:1px solid #1D6154 ;
 	font-size: 16px;
-	font-family: 'Syne';
+	font-family: "Syne";
 	border-radius: 60px;
 	background-color: white;
 	padding: 0px 15px;
@@ -222,7 +222,7 @@ textarea {
 }
 
 input[type="submit"]{ 
-	font-family: 'Syne';
+	font-family: "Syne";
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;

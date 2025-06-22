@@ -87,14 +87,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 25%;
 }
 
 .delete-btn i {
     font-size: 11px;
 }
 
+.delete-btn:hover {
+    background-color: rgb(221, 43, 43);
+}
+
 #btn-add-photo {
-    font-family: 'Syne';
+    font-family: "Syne";
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
