@@ -62,6 +62,7 @@ export async function indexEditionMode() {
 
         const container = document.createElement("div");
         container.classList.add('js-modal')
+        container.style.cursor = "pointer";
         const icon = document.createElement("i");
         icon.classList.add("fa-solid", "fa-pen-to-square"); //Ajout de l'icon avec font awesome
 
