@@ -1,10 +1,7 @@
-import { afficherGalleryModal } from "./modal.js";
-
 const listeAddedToDelete = new Set()
+const btnDeletePhotos = document.querySelector("#btn-delete-photos");
 
 function afficherHoverDeleteAndDeleteBtn(figureElement, active) {
-
-    const btnDeletePhotos = document.querySelector("#btn-delete-photos");
 
     if (active) {
         figureElement.classList.add("selection-for-delete");
@@ -13,17 +10,14 @@ function afficherHoverDeleteAndDeleteBtn(figureElement, active) {
     }
 
     if (listeAddedToDelete.size > 0) {
-        btnDeletePhotos.style.display = null;
-
+        btnDeletePhotos.style.display = "block";
     } else {
         btnDeletePhotos.style.display = "none";
     }
 }
 
-export async function ajoutListenersOnDeleteButtons() {
-    const btnsDeleteGalleryModal = await afficherGalleryModal(".delete-btn");
-    
-    btnsDeleteGalleryModal.forEach(button => {
+export async function ajoutListenersOnDeleteButtons(deleteButtons) {
+    deleteButtons.forEach(button => {
         button.addEventListener("click", () => {
             const idButton = button.getAttribute("data-id");
             const figureButton = button.closest("figure");
@@ -38,4 +32,8 @@ export async function ajoutListenersOnDeleteButtons() {
         })
     });
 
+}
+
+export async function deleteSelectedWorks() {
+    
 }

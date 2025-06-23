@@ -3,13 +3,13 @@ import { creeFiltre } from "./Services/filtres.js";
 import { loginVerification } from "./Services/login.js";
 import { indexEditionMode } from "./Services/login.js";
 import { openCloseModal } from "./Services/modal.js";
-import { ajoutListenersOnDeleteButtons } from "./Services/deleteAndAdd.js";
 
 // Affiche au chargement de la page tous les travaux et les filtres.
 window.addEventListener("DOMContentLoaded", async () => {
     
     indexEditionMode();
-
+    openCloseModal();
+    
     if (document.querySelector("#portfolio")){
         await creeFiltre();
         afficherGallery();
@@ -20,12 +20,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         event.preventDefault();
         await loginVerification();
     });
-
-    const btnModifier = document.querySelector(".projetsModifier");
-    btnModifier?.addEventListener("click", async() => {
-        await openCloseModal();
-        ajoutListenersOnDeleteButtons();
-    })
 
 });
 
