@@ -1,68 +1,41 @@
 import { afficherGalleryModal } from "./modal.js";
 
-export async function ajoutListenersBtnDelete() {
-        const deleteBtns = document.querySelectorAll(".delete-btn");
-        deleteBtns.forEach(button => {
-            button.addEventListener("click", (e) => {
-                e.preventDefault();
-                const id = e.getAttribute("data-id");
-                console.log(id)
-                const figure = button.closest("figure");
+const listeAddedToDelete = new Set()
 
-                if (selectionForDelete.has(id)) {
-                    selectionForDelete.delete(id); /* Si la corbeille d'un figure et à nouveau cliquer celui-ci est retirer de la liste de suppresion */
-                    afficherHoverForDelete(figure, false);
-                } else {
-                    selectionForDelete.add(id);
-                    afficherHoverForDelete(figure, true);
-                }
+function afficherHoverDeleteAndDeleteBtn(figureElement, active) {
 
-                afficherBtnDelete();
-            })
-        })
-    }
-
-export async function selecDeletedWorks() {
-    const selectionForDelete = new Set();
     const btnDeletePhotos = document.querySelector("#btn-delete-photos");
 
-    function afficherBtnDelete() {
-        btnDeletePhotos.style.display = selectionForDelete > 0 ? "block": "none";
+    if (active) {
+        figureElement.classList.add("selection-for-delete");
+    } else {
+        figureElement.classList.remove("selection-for-delete");
     }
 
-    function afficherHoverForDelete(figureElement, active) {
-        if (active) {
-            figureElement.classList.add("selection-for-delete");
-        } else {
-            figureElement.classList.remove("selection-for-delete");
-        }
-    } 
+    if (listeAddedToDelete.size > 0) {
+        btnDeletePhotos.style.display = null;
 
-    btnDeletePhotos.addEventListener("click", async () => {
-        if (!confirm("Êtes-vous sûr de vouloir supprimer tous les éléments sélectionnés ?")) return;
+    } else {
+        btnDeletePhotos.style.display = "none";
+    }
+}
 
-        const token = localStorage.getItem("Token");
+export async function ajoutListenersOnDeleteButtons() {
+    const btnsDeleteGalleryModal = await afficherGalleryModal(".delete-btn");
+    
+    btnsDeleteGalleryModal.forEach(button => {
+        button.addEventListener("click", () => {
+            const idButton = button.getAttribute("data-id");
+            const figureButton = button.closest("figure");
+            
+            if (listeAddedToDelete.has(idButton)){
+                listeAddedToDelete.delete(idButton);
+                afficherHoverDeleteAndDeleteBtn(figureButton, false);
+            } else {
+                listeAddedToDelete.add(idButton);
+                afficherHoverDeleteAndDeleteBtn(figureButton, true);
+            }
+        })
+    });
 
-        const deletePromises = Array.from(selectionForDelete).map(id => {
-            return fetch(`http://localhost:5678/api/works/${id}`, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    Accept: "application/json"
-                }
-            });
-        });
-        try {
-            await Promise.all(deletePromises);
-            alert("Éléments supprimés avec succès.");
-            selectionForDelete.clear();
-            afficherBtnDelete();
-            afficherGalleryModal();
-            location.reload();
-        } catch {
-            alert("Une erreur est survenue lors de la suppression.");
-        }
-
-
-    })
 }
