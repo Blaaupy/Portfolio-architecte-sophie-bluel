@@ -7,8 +7,7 @@ import { openCloseModal } from "./Services/modal.js";
 // Affiche au chargement de la page tous les travaux et les filtres.
 window.addEventListener("DOMContentLoaded", async () => {
     
-    indexEditionMode();
-    openCloseModal();
+    
 
     if (document.querySelector("#portfolio")){
         await creeFiltre();
@@ -21,6 +20,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         await loginVerification();
     });
 
+    indexEditionMode();
+    openCloseModal();
     
 
 });

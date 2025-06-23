@@ -39,7 +39,7 @@
 }
 
 .modal-wrapper h2 {
-    font-family: Work Sans;
+    font-family: "Work Sans";
     height: 30px;
     font-size: 26px;
     color: black;
@@ -98,16 +98,33 @@
     background-color: rgb(221, 43, 43);
 }
 
-#btn-add-photo {
+.modal-wrapper input {
     font-family: "Syne";
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
+    font-weight: 700;
+    color: white;
     font-size: 14px;
     width: 236px;
     height: 36px;
     border-radius: 60px;
     padding: 0px;
-    margin: 40px 0px;
 }
-    
+
+.inputsModal {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    margin: 10px 0px;
+}
+
+#btn-add-photo {
+	background-color: #1D6154;
+}
+
+#btn-delete-photos {
+    background-color: red;
+}
+
+.selection-for-delete {
+    outline: 3px solid red;
+    opacity: 0.8;
+}

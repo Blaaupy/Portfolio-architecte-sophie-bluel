@@ -13,7 +13,7 @@ export async function afficherGalleryModal() { /* fonction copier de celle  de p
 
         const deleteBtn = document.createElement("button");
         deleteBtn.classList.add("delete-btn");
-        deleteBtn.innerHTML = "<i class="fa-solid fa-trash-can"></i>";
+        deleteBtn.innerHTML = "<i class='fa-solid fa-trash-can'></i>";
         deleteBtn.setAttribute("data-id", work.id);
 
         figure.appendChild(image);
@@ -36,7 +36,7 @@ export async function openCloseModal() { /* Gère l'ouverture et la fermeture de
         modal.addEventListener("click", closeModal); /* Ici on écoute si l'utilisateur clique en dehors de la modal pour en sortir au lieu de la croix */
         modal.querySelector(".js-close-modal").addEventListener("click", closeModal);/* Ici on écoute si l'utilisateur clique sur la croix pour fermer la modal */
         modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation); /* Ici on écoute ou clique l'utilisateur afin de ne pas fermer la modal s'il clique sur la partie qui en fait partie */
-        afficherGalleryModal(); /* Affiche la gallery grâce à la fonction plus haut */
+        afficherGalleryModal();/* Affiche la gallery grâce à la fonction plus haut */
     }
 
     const closeModal = function() { /*  Ferme la modal*/
