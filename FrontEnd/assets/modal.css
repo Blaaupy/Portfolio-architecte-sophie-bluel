@@ -116,6 +116,10 @@
     margin: 10px 0px;
 }
 
+.inputsModal input {
+    cursor: pointer;
+}
+
 #btn-add-photo {
 	background-color: #1D6154;
 }

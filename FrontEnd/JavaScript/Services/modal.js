@@ -1,5 +1,6 @@
 import { fetchWork } from "../GetData.js";
 import { ajoutListenersOnDeleteButtons } from "./deleteAndAdd.js";
+import { deleteSelectedWorks } from "./deleteAndAdd.js";
 
 export async function afficherGalleryModal() { /* fonction copier de celle  de portfolio */
     const galleryModal = document.querySelector(".galleryModal");
@@ -47,6 +48,7 @@ export async function openCloseModal() { /* Gère l'ouverture et la fermeture de
 
         const deleteButtons = await afficherGalleryModal();/* Affiche la gallery grâce à la fonction plus haut */
         ajoutListenersOnDeleteButtons(deleteButtons);
+        deleteSelectedWorks();
     }
 
     const closeModal = function() { /*  Ferme la modal*/
