@@ -1,4 +1,5 @@
 import { afficherGalleryModal } from "./modal.js";
+import { fetchCategories } from "../GetData.js";
 
 const listeAddedToDelete = new Set()
 const btnDeletePhotos = document.querySelector("#btn-delete-photos");
@@ -106,9 +107,32 @@ export async function backOnGallery() {
     })
 }
 
+
+
+async function selectCategorie() {
+    const select = document.querySelector("#select-categories");
+    const categories = await fetchCategories();
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    
+    defaultOption.textContent = "--Choisissez une catégorie--";
+    select.appendChild(defaultOption);
+
+    categories.forEach(category =>{
+        const option = document.createElement("option");
+        option.value = category.id;
+        option.textContent = category.name;
+        select.appendChild(option);
+    });
+}
+
+
+
 export async function addAWork() {
 
     const btnAddPhoto = document.querySelector("#btn-add-photo");
+
     btnAddPhoto.addEventListener("click", () => {
         /* Affiche la partie ajout de la modal et affiche le bouton de retour vers la gallery */
         const modalAddWork = document.querySelector(".modal-add-work");
@@ -117,9 +141,10 @@ export async function addAWork() {
         modalGallery.style.display = "none";
         const backModal = document.querySelector(".js-back-modal");
         backModal.style.display = null;
-
+        
 
     });
+    selectCategorie();
     backOnGallery();
 }
 
