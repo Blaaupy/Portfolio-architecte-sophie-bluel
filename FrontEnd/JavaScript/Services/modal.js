@@ -1,6 +1,8 @@
 import { fetchWork } from "../GetData.js";
 import { ajoutListenersOnDeleteButtons } from "./deleteAndAdd.js";
 import { deleteSelectedWorks } from "./deleteAndAdd.js";
+import { addAWork } from "./deleteAndAdd.js";
+import { clearListeAddedToDelete } from "./deleteAndAdd.js";
 
 export async function afficherGalleryModal() { /* fonction copier de celle  de portfolio */
     const galleryModal = document.querySelector(".galleryModal");
@@ -49,11 +51,12 @@ export async function openCloseModal() { /* Gère l'ouverture et la fermeture de
         const deleteButtons = await afficherGalleryModal();/* Affiche la gallery grâce à la fonction plus haut */
         ajoutListenersOnDeleteButtons(deleteButtons);
         deleteSelectedWorks();
+        addAWork();
     }
 
     const closeModal = function() { /*  Ferme la modal*/
         if (modal === null) return; /* On verifie si la modal est ouverte, si elle ne l'est pas le programme s'arrete ici */
-        
+        clearListeAddedToDelete();
         modal.style.display = "none";/* On cache la modal */
         modal.setAttribute("aria-hidden", "true");
         modal.removeAttribute("aria-modal");
@@ -61,6 +64,8 @@ export async function openCloseModal() { /* Gère l'ouverture et la fermeture de
         modal.querySelector(".js-close-modal").removeEventListener("click", closeModal); /* Inverse ce qu'on a fait dans openModal */
         modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
         modal = null;
+        
+        
     }
 
     const stopPropagation = function (e) { /* Empeche la fermeture de la modal si l'on clique dessus sans cela nous ne pourrions rien faire dessus elle se fermerait au moindre clic */

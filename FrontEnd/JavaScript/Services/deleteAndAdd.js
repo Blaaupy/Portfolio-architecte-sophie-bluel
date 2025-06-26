@@ -1,8 +1,15 @@
 import { afficherGalleryModal } from "./modal.js";
 
-
 const listeAddedToDelete = new Set()
 const btnDeletePhotos = document.querySelector("#btn-delete-photos");
+
+export function clearListeAddedToDelete() {
+    listeAddedToDelete.clear();
+    btnDeletePhotos.style.display = "none";
+    const selectedFigures = document.querySelectorAll(".selection-for-delete");
+    selectedFigures.forEach(figure => figure.classList.remove("selection-for-delete"));
+}
+
 
 function afficherHoverDeleteAndDeleteBtn(figureElement, active) {
 
@@ -13,7 +20,7 @@ function afficherHoverDeleteAndDeleteBtn(figureElement, active) {
     }
 
     if (listeAddedToDelete.size > 0) {
-        btnDeletePhotos.style.display = "block";
+        btnDeletePhotos.style.display = "flex";
     } else {
         btnDeletePhotos.style.display = "none";
     }
@@ -86,4 +93,33 @@ export async function deleteSelectedWorks() {
     });
 };
 
+
+export async function backOnGallery() {
+    const btnRetour = document.querySelector(".js-back-modal");
+    btnRetour.addEventListener("click", () => {
+        const modalGallery = document.querySelector(".modal-gallery");
+        modalGallery.style.display = null;
+        const modalAddWork = document.querySelector(".modal-add-work");
+        modalAddWork.style.display = "none";
+        const backModal = document.querySelector(".js-back-modal");
+        backModal.style.display = "none";
+    })
+}
+
+export async function addAWork() {
+
+    const btnAddPhoto = document.querySelector("#btn-add-photo");
+    btnAddPhoto.addEventListener("click", () => {
+        /* Affiche la partie ajout de la modal et affiche le bouton de retour vers la gallery */
+        const modalAddWork = document.querySelector(".modal-add-work");
+        modalAddWork.style.display = null;
+        const modalGallery = document.querySelector(".modal-gallery")
+        modalGallery.style.display = "none";
+        const backModal = document.querySelector(".js-back-modal");
+        backModal.style.display = null;
+
+
+    });
+    backOnGallery();
+}
 
