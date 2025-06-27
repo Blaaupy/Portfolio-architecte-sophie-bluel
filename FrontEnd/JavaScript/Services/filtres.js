@@ -3,7 +3,7 @@ import { afficherGallery } from "./portfolio.js";
 
 export async function creeFiltre() {
     // Récupération des informations de /categories.
-    const categories = await fetchCategories();
+    const categories = new Set(await fetchCategories());
     const listeFiltre = document.querySelector(".listeFiltre");
     listeFiltre.innerHTML = "";
 
