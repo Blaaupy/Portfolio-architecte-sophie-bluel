@@ -5,7 +5,7 @@ import { indexEditionMode } from "./Services/login.js";
 import { openModal } from "./Services/modal-propre.js";
 import { addAWork } from "./Services/addWorks.js";
 
-// Affiche au chargement de la page tous les travaux et les filtres.
+// Affiche au chargement de la page tous les travaux et les filtres et la modal.
 window.addEventListener("DOMContentLoaded", async () => {
     
     indexEditionMode();

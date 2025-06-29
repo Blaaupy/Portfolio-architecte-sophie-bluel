@@ -1,7 +1,8 @@
 import { fetchCategories } from "../GetData.js";
-import { afficherGallery } from "./portfolio.js";
+import { affichageGallery } from "./modal-propre.js";
+import { listenersAndSelection } from "./modal-propre.js";
 
-export async function backOnGallery() {
+export async function backOnGallery() { /* lorsque la flèche de retour est cliquée, affiche la modal de base */
     const modalGallery = document.querySelector(".modal-gallery");
     modalGallery.style.display = null;
     const modalAddWork = document.querySelector(".modal-add-work");
@@ -12,7 +13,7 @@ export async function backOnGallery() {
 
 
 
-async function selectCategorie() {
+async function selectCategorie() { /* Récupère les catégories dans l'API et les génère en éléments options pour la balise select */
     const select = document.querySelector("#select-categories");
     select.innerHTML = "";
     const categories = await fetchCategories();
@@ -31,11 +32,12 @@ async function selectCategorie() {
     });
 }
 
-function afficherPhoto() {
+function afficherPhoto() { /* Recupère l'image de l'utilisateur et l'affiche */
     const fileInput = document.querySelector("#input-file-modal");
     const labelPhoto = document.querySelector(".upload-label");
     
     fileInput.addEventListener("change", () => {
+
         const file = fileInput.files[0];
         const preview = document.createElement("img");
 
@@ -76,10 +78,7 @@ function afficherModalAdd() {
     });
 }
 
-const inputTitre = document.querySelector("#input-titre-modal");
-
-
-function verifierChampsRemplis() {
+function verifierChampsRemplis() {  // Vérifie si tous les champs sont remplis si oui, le btn valider devient clickable sinon il reste gris et non clickable
     const inputTitre = document.querySelector("#input-titre-modal");
     const inputImage = document.querySelector("#input-file-modal");
     const select = document.querySelector("#select-categories");
@@ -103,20 +102,25 @@ function verifierChampsRemplis() {
 }
 
 
-export async function addAWork() {
+export async function addAWork() { // Fonction qui affiche la modal puis verifie si tous les champs sont remplis grace à la fonction plus haut et en fonction des valeurs ajoute un travail
+    /* Affiche la modal et les options de select */
     afficherModalAdd();
     afficherPhoto();
-    await selectCategorie();
+    await selectCategorie(); 
 
     const btnValider = document.querySelector("#btn-confirm-add-photo")
     const inputTitre = document.querySelector("#input-titre-modal");
     const inputImage = document.querySelector("#input-file-modal");
     const select = document.querySelector("#select-categories");
+    const labelPhoto = document.querySelector(".upload-label");
+    const labelPhotoHTMLInitial = labelPhoto.innerHTML;
 
+    /* Verifications */
     inputTitre.addEventListener("input", verifierChampsRemplis);
     inputImage.addEventListener("change", verifierChampsRemplis);
     select.addEventListener("change", verifierChampsRemplis);
 
+    /* Ajout listener du click sur le bouton valider qui sera afficher en vert si tous les champs sont remplis */
     btnValider.addEventListener("click", async (e)=> {
         e.preventDefault();
 
@@ -124,18 +128,21 @@ export async function addAWork() {
         const titre = inputTitre.value.trim();
         const categoryId = select.value;
 
-        if (!imageFile || !titre || isNaN(categoryId)) {
+        if (!imageFile || !titre || !(categoryId)) {
             alert("Tous les champs doivent être remplis.");
+            console.log(imageFile)
+            console.log(titre)
+            console.log(categoryId)
             return;
-        }
+        }   
         const token = localStorage.getItem("Token");
 
-
+        /* Convertis les données pour le post */
         const formData = new FormData();
         formData.append("image", imageFile);      
         formData.append("title", titre);             
         formData.append("category", categoryId);
-
+        /* Envoie la nouvelle image, titre et catégorie dans l'api */
         const response = await fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
@@ -150,12 +157,21 @@ export async function addAWork() {
             alert("Le projet a été ajouté avec succès !");
 
             // Réinitialisation du formulaire
-            inputTitre.value = "";
-            inputImage.value = "";
-            select.value = "";
+            inputTitre.value = "";               // ➜ Vide le titre
+            inputImage.value = "";               // ➜ Vide le fichier
+            select.value = "";                   // ➜ Réinitialise le select
+            labelPhoto.innerHTML = labelPhotoHTMLInitial;
+
+
+            // Désactiver le bouton Valider à nouveau
+            btnValider.style.backgroundColor = "gray";
+            btnValider.style.cursor = "default";
+            btnValider.disabled = true;
 
             backOnGallery();
-            await afficherGallery();
+            await affichageGallery().then(() =>{ /* Affiche la gallery et ajoute ensuite les listeners sur les boutons delete */
+                listenersAndSelection();
+            })
 
         } else if (response.status === 400) {
             alert("Requête invalide. Vérifie les champs.");

@@ -40,7 +40,7 @@ function closeModal() { /*  Ferme la modal*/
 
 /* Maintenant affichage de la gallery */
 
-async function affichageGallery() {
+export async function affichageGallery() {
     const works = await fetchWork();
     const galleryModal = document.querySelector(".galleryModal");
     galleryModal.innerHTML = "";
@@ -67,7 +67,7 @@ async function affichageGallery() {
 le hover de quand un travail est séléctioner, le postdelete pour tout supprimer et après le refresh de l'affichage et aorès se refresh la posibilité de recommencer*/
 const btnDeletePhotos = document.querySelector("#btn-delete-photos");
 
-async function listenersAndSelection(){ /* Ajoute les listeners hover si selectioner + affiche le button si plus d'un travail est selectioner */
+export async function listenersAndSelection(){ /* Ajoute les listeners hover si selectioner + affiche le button si plus d'un travail est selectioner */
     await affichageGallery();
     const allDeleteButtons = document.querySelectorAll(".delete-btn"); 
     allDeleteButtons.forEach(button => {
