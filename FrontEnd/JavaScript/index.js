@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     
     indexEditionMode();
     openModal();
-    addAWork();
+    addAWork(); 
     
     if (document.querySelector("#portfolio")){
         await creeFiltre();

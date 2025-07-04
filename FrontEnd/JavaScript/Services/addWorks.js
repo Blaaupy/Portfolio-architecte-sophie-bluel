@@ -1,10 +1,11 @@
 import { fetchCategories } from "../GetData.js";
 import { affichageGallery } from "./modal-propre.js";
 import { listenersAndSelection } from "./modal-propre.js";
+import { afficherGallery } from "./portfolio.js";
 
 export async function backOnGallery() { /* lorsque la flèche de retour est cliquée, affiche la modal de base */
     const modalGallery = document.querySelector(".modal-gallery");
-    modalGallery.style.display = null;
+    modalGallery.style.display = "flex";
     const modalAddWork = document.querySelector(".modal-add-work");
     modalAddWork.style.display = "none";
     const backModal = document.querySelector(".js-back-modal");
@@ -67,14 +68,16 @@ function afficherModalAdd() {
     btnAddPhoto.addEventListener("click", () => {
         /* Affiche la partie ajout de la modal et affiche le bouton de retour vers la gallery */
         const modalAddWork = document.querySelector(".modal-add-work");
-        modalAddWork.style.display = null;
+        modalAddWork.style.display = "flex";
         const modalGallery = document.querySelector(".modal-gallery")
         modalGallery.style.display = "none";
         const backModal = document.querySelector(".js-back-modal");
-        backModal.style.display = null;
+        backModal.style.display = "flex";
         btnRetour.addEventListener("click", () => {
             backOnGallery();
-        });  
+            btnRetour.removeEventListener("click", backOnGallery); 
+        });
+        
     });
 }
 
@@ -172,6 +175,7 @@ export async function addAWork() { // Fonction qui affiche la modal puis verifie
             await affichageGallery().then(() =>{ /* Affiche la gallery et ajoute ensuite les listeners sur les boutons delete */
                 listenersAndSelection();
             })
+            await afficherGallery();
 
         } else if (response.status === 400) {
             alert("Requête invalide. Vérifie les champs.");

@@ -52,14 +52,14 @@ export async function indexEditionMode() {
         navLogout.addEventListener("click", () => {
             const confirmation = window.confirm("Voulez-vous vraiment vous déconnecter ?"); // Alert pour comfirmer la déconnection 
             if (confirmation) {
-                localStorage.removeItem("Token"); // Retire le token du local storage afin de vraiment tout déconnecter
-                location.reload(); // Recharge la page après logout
+                localStorage.removeItem("Token");// Retire le token du local storage afin de vraiment tout déconnecter
+                window.location.href = "index.html";// Redirection après le logout 
             }
         });
-        logout.appendChild(navLogout);
+        logout.appendChild(navLogout); 
 
         const btnModifier = document.querySelector(".projetsModifier");
-
+        btnModifier.style.marginBottom = "100px";
         const container = document.createElement("div");
         container.classList.add("js-modal")
         container.style.cursor = "pointer";
@@ -71,8 +71,22 @@ export async function indexEditionMode() {
 
         container.appendChild(icon);
         container.appendChild(modifier);
-
         btnModifier.appendChild(container);
+
+        const blackBar = document.querySelector(".blackBar"); /* Ajoute le Edition mode en haut de la page */
+        blackBar.style.display = "flex";
+        const textBlackBar = document.createElement("p");
+        const icon2 = document.createElement("i");
+        icon2.classList.add("fa-solid", "fa-pen-to-square"); //Ajout de l'icon avec font awesome
+
+        textBlackBar.textContent = "Mode édition";
+        blackBar.appendChild(icon2);
+        blackBar.appendChild(textBlackBar);
+        /* Retire la liste de filtre */
+        const listeFiltre = document.querySelector(".listeFiltre")
+        listeFiltre.style.display = "none"; 
+
+        
 
     }
 }

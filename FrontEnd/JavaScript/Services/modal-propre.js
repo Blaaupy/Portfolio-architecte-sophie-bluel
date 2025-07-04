@@ -1,5 +1,6 @@
 import { fetchWork } from "../GetData.js";
 import { backOnGallery } from "./addWorks.js";
+import { afficherGallery } from "./portfolio.js";
 
 
 let modal = null
@@ -11,7 +12,9 @@ export async function openModal() {
     const btnOuvrir = document.querySelector(".js-modal"); /* Ici on enregistre le bouton sur lequel on doit cliquer pour ouvrir la modal afin d'écouter ce fameux clic et d'ouvrir la modal */
     btnOuvrir.addEventListener("click", () => {
         const target = document.querySelector("#modal1"); /* Selectionne la modal */
-        target.style.display = null; /* Passe le display none à null ce qui fait que la modal n'est pas bloquée et ressort naturellement */
+        target.style.display = "flex"; /* Passe le display none à null ce qui fait que la modal n'est pas bloquée et ressort naturellement */
+        const modalAddWork = document.querySelector(".modal-add-work");
+        modalAddWork.style.display = "none";
         target.removeAttribute("aria-hidden"); /* retire le cache de la modal */
         target.setAttribute("aria-modal", "true"); /* Confirme que c'est bien une modal et qu'elle doit s'afficher un peu comme un "overlay" */
         modal = target; 
@@ -68,7 +71,6 @@ le hover de quand un travail est séléctioner, le postdelete pour tout supprime
 const btnDeletePhotos = document.querySelector("#btn-delete-photos");
 
 export async function listenersAndSelection(){ /* Ajoute les listeners hover si selectioner + affiche le button si plus d'un travail est selectioner */
-    await affichageGallery();
     const allDeleteButtons = document.querySelectorAll(".delete-btn"); 
     allDeleteButtons.forEach(button => {
         button.addEventListener("click", () =>{
@@ -79,7 +81,7 @@ export async function listenersAndSelection(){ /* Ajoute les listeners hover si 
             }
             const selectedWorks = new Set(document.querySelectorAll(".selection-for-delete"));
             if (selectedWorks.size > 0) {
-                btnDeletePhotos.style.display = null;
+                btnDeletePhotos.style.display = "flex";
             } else {
                 btnDeletePhotos.style.display = "none"
             }
@@ -87,7 +89,7 @@ export async function listenersAndSelection(){ /* Ajoute les listeners hover si 
     })
 }
 
-async function postDelete() {
+export async function postDelete() {
     btnDeletePhotos.addEventListener("click", async () =>{
         if (!confirm("Êtes-vous sûr de vouloir supprimer tous les éléments sélectionnés ?")) return;
         const token = localStorage.getItem("Token"); /* Recuperation du token pour l'auth nécesaire a la suppresion  */
@@ -123,6 +125,7 @@ async function postDelete() {
         }
 
         await affichageGallery();
+        await afficherGallery();
         listenersAndSelection();
         btnDeletePhotos.style.display = "none";
     })
