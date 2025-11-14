@@ -1,13 +1,13 @@
-// récupere les travaux de Sophie depuis l'api.
+// Récupère les travaux
 export async function fetchWork() {
-    const reponse = await fetch("http://localhost:5678/api/works");
-    const works = await reponse.json();
-    return works;
+    const response = await fetch("./data/works.json");
+    if (!response.ok) throw new Error("Impossible de charger les travaux");
+    return response.json();
 }
 
-// récupere les catégories des travaux de Sophie
-export async function fetchCategories(){
-    const reponse = await fetch("http://localhost:5678/api/categories");
-    const categories = reponse.json();
-    return categories;
+// Récupère les catégories
+export async function fetchCategories() {
+    const response = await fetch("./data/categories.json");
+    if (!response.ok) throw new Error("Impossible de charger les catégories");
+    return response.json();
 }

@@ -1,0 +1,14 @@
+[
+  { "id": 1, "title": "Abajour Tahina", "image": "abajour-tahina.png", "categoryId": 1 },
+  { "id": 2, "title": "Appartement Paris V", "image": "appartement-paris-v.png", "categoryId": 2 },
+  { "id": 3, "title": "Appartement Paris X", "image": "appartement-paris-x.png", "categoryId": 2 },
+  { "id": 4, "title": "Appartement Paris XVIII", "image": "appartement-paris-xviii.png", "categoryId": 2 },
+  { "id": 5, "title": "Bar Lullaby Paris", "image": "bar-lullaby-paris.png", "categoryId": 3 },
+  { "id": 6, "title": "Hotel First Arte New Delhi", "image": "hotel-first-arte-new-delhi.png", "categoryId": 4 },
+  { "id": 7, "title": "La Balisiere", "image": "la-balisiere.png", "categoryId": 1 },
+  { "id": 8, "title": "Le Coteau Cassis", "image": "le-coteau-cassis.png", "categoryId": 2 },
+  { "id": 9, "title": "Restaurant Sushisen Londres", "image": "restaurant-sushisen-londres.png", "categoryId": 3 },
+  { "id": 10, "title": "Sophie Bluel", "image": "sophie-bluel.png", "categoryId": 5 },
+  { "id": 11, "title": "Structures Thermopolis", "image": "structures-thermopolis.png", "categoryId": 4 },
+  { "id": 12, "title": "Villa Ferneze", "image": "villa-ferneze.png", "categoryId": 2 }
+]

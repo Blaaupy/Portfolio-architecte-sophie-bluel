@@ -2,42 +2,32 @@ import { fetchCategories } from "../GetData.js";
 import { afficherGallery } from "./portfolio.js";
 
 export async function creeFiltre() {
-    // Récupération des informations de /categories.
-    const categories = new Set(await fetchCategories());
+    const categories = await fetchCategories();
     const listeFiltre = document.querySelector(".listeFiltre");
     listeFiltre.innerHTML = "";
 
-    // Bouton Tous
+    // Bouton "Tous"
     const boutonTous = document.createElement("button");
     boutonTous.textContent = "Tous";
-    boutonTous.classList.add("btn-tous");
+    boutonTous.classList.add("btn-tous", "active");
     boutonTous.addEventListener("click", () => afficherGallery());
     listeFiltre.appendChild(boutonTous);
 
-    // Génération des autres filtres
+    // Boutons catégories
     categories.forEach(category => {
-        const buttonFiltre = document.createElement("button"); 
-        buttonFiltre.textContent = category.name;
-
-        const className = "btn-" + category.name.replace(/\s+/g, "-");
-        buttonFiltre.classList.add(className);
-
-        buttonFiltre.addEventListener("click", () => {
-            afficherGallery(category.id);
-        });
-
-        listeFiltre.appendChild(buttonFiltre);
+        const button = document.createElement("button");
+        button.textContent = category.name;
+        button.classList.add("btn-category");
+        button.addEventListener("click", () => afficherGallery(category.id));
+        listeFiltre.appendChild(button);
     });
-    console.log(categories);
-    // Ajout de active sur Tous
-    boutonTous.classList.add("active");
 
-    // Gestion de la classe active pour tous les boutons afin de savoir quel est le filtre actif.
+    // Gestion de la classe active + hover
     const boutons = listeFiltre.querySelectorAll("button");
-    boutons.forEach(button => {
-        button.addEventListener("click", () => {
-            boutons.forEach(btn => btn.classList.remove("active"));
-            button.classList.add("active");
+    boutons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            boutons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
         });
     });
 }

@@ -1,27 +1,33 @@
-import {afficherGallery} from "./Services/portfolio.js";
-import { creeFiltre } from "./Services/filtres.js"; 
-import { loginVerification } from "./Services/login.js";
-import { indexEditionMode } from "./Services/login.js";
+import { afficherGallery } from "./Services/portfolio.js";
+import { creeFiltre } from "./Services/filtres.js";
+import { loginVerification, indexEditionMode } from "./Services/login.js";
 import { openModal } from "./Services/modal-propre.js";
 import { addAWork } from "./Services/addWorks.js";
 
-// Affiche au chargement de la page tous les travaux et les filtres et la modal.
+// Fonction principale exécutée au chargement
 window.addEventListener("DOMContentLoaded", async () => {
-    
+
+    // Si la page est en mode édition (login/admin)
     indexEditionMode();
+
+    // Modal et ajout de travaux
     openModal();
-    addAWork(); 
-    
-    if (document.querySelector("#portfolio")){
-        await creeFiltre();
-        afficherGallery();
+    addAWork();
+
+    // Portfolio et filtres
+    const portfolioSection = document.querySelector("#portfolio");
+    if (portfolioSection) {
+        await creeFiltre();      // Crée les boutons filtres
+        afficherGallery();       // Affiche tous les travaux
     }
-    
-    const form = document.querySelector("#loginForm");
-    form?.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        await loginVerification();
-    });
+
+    // Login
+    const formLogin = document.querySelector("#loginForm");
+    if (formLogin) {
+        formLogin.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            await loginVerification();
+        });
+    }
 
 });
-
